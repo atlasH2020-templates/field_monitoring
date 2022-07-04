@@ -98,27 +98,44 @@ paths:
                 
     
   /indices/download:  
-    post:
+    get:
       tags:
       - Indices Download
       summary: Get Indices results
       operationId: DownloadIndice
-      requestBody:
-        description: Download a Field Growth index
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/IndicesDownload'
-        required: true
+      parameters:
+        - in: query
+          name: indice
+          schema:
+            type: string
+            example: 'ndvi'
+          description: Name of field monitoring indice
+          required : true
+        - in: query
+          name: field-urn
+          schema:
+            type: string
+            example: urn:service_id:id
+          description: The Field Uniform Resource Name
+          required : true
+        - in: query
+          name: date
+          schema:
+            type: string
+            format: date
+            example: "2019-05-17"
+            pattern: '^\d{4}-\d{2}-\d{2}$'
+          description: The date to use for the retrieval of the indicator. If date omitted the current date will be used
+          required : true
       responses:
         200:
           description: Field Monitoring index
           content:
-            image/tiff:
+            image/geotiff:
               schema:
                 type: string
                 format: binary
-                example: image/tiff
+                example: image/geotiff
         400:
           description: Invalid Field URN
           content:
@@ -200,27 +217,6 @@ components:
       items:
        $ref: '#/components/schemas/Indice'
   
-    IndicesDownload:
-      type: object
-      required:
-        - indice
-        - field-urn
-        - date
-      properties:
-        indice:
-          type : string
-          items:
-           $ref: '#/components/schemas/Indice'
-          description: List of the field monitoring indices
-          example: 'ndvi'
-        field-urn:
-          type: string
-          example: urn:service_id:id
-          description: The Field Uniform Resource Name
-        date:
-          type: string
-          format: date
-          description: The date to use for the retrieval of the indicator. If date omitted the current date will be used
     
     DateResults:
       type: object
