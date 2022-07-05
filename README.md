@@ -96,12 +96,10 @@ _The service will provide:_
 
 | _ **Type of Data** _ | _ **Parameter** _ | _ **Spatial Resolution** _ | _ **Temporal Resolution** _ | _ **Source** _ | _ **Range** _ |
 | --- | --- | --- | --- | --- | --- |
-| _EO data_ | _NDVI_ | _10 m_ |
-- _Less than 5 days depending on cloudiness_
- | _AgroApps API_ | _[-1, 1]_ |
-| _EO data_ | LAI | _10 or 20 m_ | _AgroApps API_ | _Crop specific_ |
-| _EO data_ | Chlorophyll content | _10 or 20 m_ | _AgroApps API_ | _Crop specific_ |
-| _EO data_ | Biomass | _10 or 20 m_ | _AgroApps API_ | _Crop specific_ |
+| _EO data_ | _NDVI_ | _10 m_ |  _Less than 5 days depending on cloudiness_ | _AgroApps API_ | _[-1, 1]_ |
+| _EO data_ | LAI | _10 or 20 m_ |  _Less than 5 days depending on cloudiness_ | _AgroApps API_ | _Crop specific_ |
+| _EO data_ | Chlorophyll content | _10 or 20 m_ |  _Less than 5 days depending on cloudiness_ |  _AgroApps API_ | _Crop specific_ |
+| _EO data_ | Biomass | _10 or 20 m_ |  _Less than 5 days depending on cloudiness_|  _AgroApps API_ | _Crop specific_ |
 
 ##
 
