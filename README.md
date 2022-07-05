@@ -46,7 +46,7 @@ The service provides:
 2. maps of biophysical parameters in sub-parcel level (pixel 10 or 20 m spatial resolution);
 3. yield and crop residues maps (pixel 10 m spatial resolution);
 
-The provided **C**** SM service** addresses to different user segments:
+The provided **CSM service** addresses to different user segments:
 
 - **farmers** ; they can address crop stress early on and avoid yield damage that would arise if the situation was addressed later on;
 - **agricultural insurance companies** ; provides them with continuous information of their portfolio exposure in order to have an estimation of the maximum reimbursement cost, in the case of an event, and assist them in better pre- and after disaster-related decision-making;
@@ -125,4 +125,3 @@ _The service will provide:_
 | _EO data_ | Yield Estimation | _10 m_ | _Less than 5 days depending on cloudiness_ | _AgroApps API_ | _Crop specific_ |
 | _EO data_ | _Crop Residues Estimation_ | _10 m_ | _AgroApps API_ | _Crop specific_ |
 
-Technical References
