@@ -56,7 +56,7 @@ This section provides a summary of the Crop Status Monitoring API endpoints:
 		- the date of interest for indicator retrieval (if omitted, current date is assigned to it).
 - **Output**: The estimated results for the input index at the input date of interest in geotiff format or the description of the encountered error (in case something goes wrong) in JSON format.  
 
-**Satellite Vegetation Index**
+**Satellite Fused Vegetation Index**
 
 - **Description**: Returns the estimated Fused NDVI images for the requested field and time period.
 - **Input**: Request body only, containing:
