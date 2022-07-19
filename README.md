@@ -58,7 +58,7 @@ This section provides a summary of the Crop Status Monitoring API endpoints:
 
 **Satellite Vegetation Index**
 
-- **Description**: Returns the estimated NDVI images for the requested field and time period.
+- **Description**: Returns the estimated Fused NDVI images for the requested field and time period.
 - **Input**: Request body only, containing:
 	- the field unique reference code,
 	- the start date of the growing season, and 
