@@ -37,12 +37,20 @@ paths:
               example:
                 description: "503 Service Unavailable"
   
-  /indices/search:
+  /indices/{field_urn}/search:
     post:
       operationId: searchIndicesByDateRange
       tags:
        - Indices Search
       summary: List of available Indices by date range
+      parameters:
+        - name: field_urn
+          in: path
+          schema:
+            type: string
+            example: 'urn:service_id:id'
+          description: The Field Uniform Resource Name
+          required : true
       requestBody:
         description: Request for available Field Growth indexes by date range. A service incapable of providing such information should return all requested dates & indices as available.
         content:
@@ -66,16 +74,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
-                description: "204 No content: Not available Indice"
+                description: "204 No content: Not available Index"
                 
         400:
-          description: Invalid Date range or Indice
+          description: Invalid Date range or Index
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
-                description: "400 Bad Request: invalid Data range or Invalid Indice"
+                description: "400 Bad Request: invalid Data range or Invalid Index"
                 
         500:
           description: Internal server error
@@ -97,26 +105,26 @@ paths:
                 
                 
     
-  /indices/download:  
+  /indices/{field_urn}/download/{index}:  
     get:
       tags:
       - Indices Download
       summary: Get Indices results
       operationId: DownloadIndice
       parameters:
-        - in: query
-          name: indice
+        - name: field_urn
+          in: path
+          schema:
+            type: string
+            example: 'urn:service_id:id'
+          description: The Field Uniform Resource Name
+          required : true
+        - name: index
+          in: path
           schema:
             type: string
             example: 'ndvi'
-          description: Name of field monitoring indice
-          required : true
-        - in: query
-          name: field-urn
-          schema:
-            type: string
-            example: urn:service_id:id
-          description: The Field Uniform Resource Name
+          description: Name of field monitoring index
           required : true
         - in: query
           name: date
@@ -125,8 +133,8 @@ paths:
             format: date
             example: "2019-05-17"
             pattern: '^\d{4}-\d{2}-\d{2}$'
-          description: The date to use for the retrieval of the indicator. If date omitted the current date will be used
-          required : true
+          description: The date to use for the retrieval of the indicator. If omitted, the current date will be used.
+          required : false
       responses:
         200:
           description: Field Monitoring index
@@ -152,7 +160,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
-                description: "204 No content: Not available Indice"
+                description: "204 No content: Not available Index"
         
         404:
           description: Unknown Field URN
@@ -191,20 +199,11 @@ paths:
 
 components:
   schemas:
-    Indice:
+    Index:
       type: string
-      description: Name of Indice.
+      description: Name of Index.
       enum:
-      - "clre"
-      - "gndvi"
-      - "gwdrvi"
-      - "mndwi"
-      - "naoc"
-      - "nbr"
       - "ndvi"
-      - "osavi"
-      - "rvi"
-      - "ndwi"
       - "biomass"
       - "lai"
       - "chl-lai"
@@ -215,7 +214,7 @@ components:
     Indices:
       type: array
       items:
-       $ref: '#/components/schemas/Indice'
+       $ref: '#/components/schemas/Index'
   
     
     DateResults:
@@ -227,7 +226,7 @@ components:
           example: "2019-05-17"
         indices:
           items: 
-            $ref: '#/components/schemas/Indice'
+            $ref: '#/components/schemas/Index'
           description: Available Indices.
           
     IndicesSearchResults:
@@ -239,18 +238,13 @@ components:
      type: object
      required:
       - indices
-      - field-urn
       - date_from
      properties:
       indices:
         type: array
         items: 
-         $ref: '#/components/schemas/Indice'
+         $ref: '#/components/schemas/Index'
         description: List of the farm monitoring indices
-      field-urn:
-        type: string
-        example: urn:service_id:id
-        description: The field Uniform Resource Name
       date_from:
         type: string
         format: date_from
@@ -266,6 +260,4 @@ components:
       properties:
         description:
           type: string
-  
-    
-
+		  
