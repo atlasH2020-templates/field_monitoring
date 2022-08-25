@@ -43,7 +43,7 @@ This section provides a summary of the Crop Status Monitoring API endpoints:
 		- the indices of interest, 
 		- the start date of the interval of interest and
 		- the end date of interest (if omitted, current date is assigned to it).
-- **Output**: A list of the dates for which the requested field growth indices have been calculated or the description of the encountered error (in case something goes wrong) in JSON format.
+- **Output**: A list of the dates for which the requested field growth indices have been calculated along with pre-constructed Download GET request or the description of the encountered error (in case something goes wrong) in JSON format.
 
 **Indices Download**
 
@@ -56,14 +56,6 @@ This section provides a summary of the Crop Status Monitoring API endpoints:
 		- the date of interest for indicator retrieval (if omitted, current date is assigned to it).
 - **Output**: The estimated results for the input index at the input date of interest in geotiff format or the description of the encountered error (in case something goes wrong) in JSON format.  
 
-**Satellite Vegetation Index**
-
-- **Description**: Returns the estimated NDVI images for the requested field and time period.
-- **Input**: Request body only, containing:
-	- the field unique reference code,
-	- the start date of the growing season, and 
-	- the end date of the growing season.
-- **Output**: The list of estimated geotiff images in base64 format, along with the corresponding dates of estimation and the sensors that captured the data. In case something goes wrong, the description of the encountered error along with its status code is returned, in JSON format. 
 
 ##
 
