@@ -200,7 +200,7 @@ components:
       properties:
         download_url:
           type: string
-          description: '/indices/{field_urn}/download/{index}' 
+          description: 'product_download_url' 
           example: '/indices/{field_urn}/download/{index}?date={date}'
         index:
           type: string
