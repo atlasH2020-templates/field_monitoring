@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Field monitoring service template
   description: Agricultural services for Field monitoring
-  version: 0.1.1
+  version: 0.1.0
 paths:
   /indices/list:
     get:
