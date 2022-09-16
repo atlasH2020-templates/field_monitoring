@@ -93,94 +93,7 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
               example:
                 description: 503 Service Unavailable
-  /indices/{field_urn}/download/{index}:
-    get:
-      tags:
-        - Indices Download
-      summary: Get Indices results
-      operationId: DownloadIndice
-      parameters:
-        - name: field_urn
-          in: path
-          schema:
-            type: string
-            example: urn:service_id:id
-          description: The Field Uniform Resource Name
-          required: true
-        - name: index
-          in: path
-          schema:
-            type: string
-            example: ndvi
-          description: Name of field monitoring index
-          required: true
-        - in: query
-          name: date
-          schema:
-            type: string
-            format: date
-            example: '2019-05-17'
-            pattern: ^\d{4}-\d{2}-\d{2}$
-          description: The date to use for the retrieval of the indicator. If omitted, the current date will be used.
-          required: false
-      responses:
-        '200':
-          description: Field Monitoring index
-          content:
-            image/geotiff:
-              schema:
-                type: string
-                format: binary
-                example: image/geotiff
-        '204':
-          description: Not available Content
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: '204 No content: Not available Index'
-        '400':
-          description: Invalid Field URN
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: '400 Bad Request: Field URN is invalid'
-        '404':
-          description: Unknown Field URN
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: '404 Not Found: Field URN not found'
-        '406':
-          description: Field index out of geospatial bounds
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: '406 Not Acceptable: Field index out of geospatial bounds'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: 500 Internal Server Error
-        '503':
-          description: Service Unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: 503 Service Unavailable
-
+ 
 components:
   schemas:
     Index:
@@ -200,8 +113,8 @@ components:
       properties:
         download_url:
           type: string
-          description: 'product_download_url' 
-          example: '/indices/{field_urn}/download/{index}?date={date}'
+          description: 'Download Url' 
+          example: '{product_download_url}'
         index:
           type: string
           items :

@@ -43,18 +43,8 @@ This section provides a summary of the Crop Status Monitoring API endpoints:
 		- the indices of interest, 
 		- the start date of the interval of interest and
 		- the end date of interest (if omitted, current date is assigned to it).
-- **Output**: A list of the dates for which the requested field growth indices have been calculated along with pre-constructed Download GET request or the description of the encountered error (in case something goes wrong) in JSON format.
+- **Output**: A list of the dates for which the requested field growth indices have been calculated along with the Download URL or the description of the encountered error (in case something goes wrong) in JSON format.
 
-**Indices Download**
-
-- **Description**: Returns the estimated results for the index of interest at the requested date.
-- **Input**: 
-	1. Path parameters:
-		- the field URN,
-		- the name of the index of interest.
-	2. Query parameter:
-		- the date of interest for indicator retrieval (if omitted, current date is assigned to it).
-- **Output**: The estimated results for the input index at the input date of interest in geotiff format or the description of the encountered error (in case something goes wrong) in JSON format.  
 
 
 ##
