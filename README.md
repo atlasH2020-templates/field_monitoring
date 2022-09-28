@@ -2,17 +2,19 @@
 
 # ATLAS Service Template Specification
 
-# Name: Field Monitoring
+### Name: Field Monitoring
 
-# Author(s): AgroApps (AGA)
+### Author(s): AgroApps (AGA)
 
-_The &quot;__Field Monitoring&quot; ATLAS Service Template_
+### Version: 0.1.1
+
+_The &quot;Field Monitoring&quot; ATLAS Service Template_
 
 This service will deliver a number of indicators for field monitoring.
 
 ## INTRODUCTION
 
-The **ATLAS Field Monitoring Service Template**, is provides crop monitoring and farming service products, through the use of validated algorithms. The aim of the **Field Monitoring Service Template** is to provide farmers with information on their fields and crops&#39; health status, through a biophysical proxy. Another aim is to provide estimations of the expected yield and crop residues. The Field Monitoring service template can help farmers identify anomalies in plant performance during the growing season.
+The **Field Monitoring Service Template**, provides crop monitoring and farming service products, through the use of validated algorithms. The aim of the **Field Monitoring Service Template** is to provide farmers with information on their fields and crops&#39; health status, through a biophysical proxy. Another aim is to provide estimations of the expected yield and crop residues. The Field Monitoring service template can help farmers identify anomalies in plant performance during the growing season.
 
 The **Field Monitoring Service Template** will provide crop growth, yield and crop residues information in parcel and sub parcel level and will enable farmers to keep an eye on their crops&#39; status **from emergence through harvest**. Local deviations of the calculated parameters could imply the occurrence of abiotic and/or biotic stress in crops. Indirectly, crop growth monitoring helps in delineating different management zones at sub-parcel level, that are otherwise invisible to the naked eye, for variable rate application of crop protection products (CPPs) or fertilizers.
 
