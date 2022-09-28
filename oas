@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Field monitoring service template
   description: Agricultural services for Field monitoring
-  version: 0.1.0
+  version: 0.1.1
 paths:
   /indices/list:
     get:
@@ -48,7 +48,7 @@ paths:
           description: The Field Uniform Resource Name
           required: true
       requestBody:
-        description: Request for available Field Growth indexes by date range. A service incapable of providing such information should return all requested dates & indices as available.
+        description: Request for available indices by date range. A service incapable of providing such information should return all requested dates & indices as available.
         content:
           application/json:
             schema:
@@ -62,13 +62,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/IndicesSearchResults'
         '204':
-          description: Not available Content
+          description: No available Content
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
               example:
-                description: '204 No content: Not available Index'
+                description: '204 No content: No available Index'
         '400':
           description: Invalid Date range or Index
           content:
@@ -98,7 +98,7 @@ components:
   schemas:
     Index:
       type: string
-      description: Name of Index.
+      description: Name of Index
       enum:
         - ndvi
         - biomass
@@ -107,6 +107,7 @@ components:
         - canopy-water-content
         - yield-estimation
         - crop-residues
+        - maturity
         
     IndexSearch:
       type: object
@@ -119,7 +120,7 @@ components:
           type: string
           items :
             $ref: '#/components/schemas/Index'
-          description: Index Name.
+          description: Index Name
           example: "ndvi"
     
     Indices:
@@ -139,7 +140,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IndexSearch'
-          description: Available Indices.
+          description: Available Indices
    
    
     IndicesSearchResults:
@@ -162,11 +163,14 @@ components:
         date_from:
           type: string
           format: date_from
-          description: The start date to use for the retrieval of the indicator.
+          description: The start date to use for the retrieval of the indicator
         date_to:
           type: string
           format: date_to
-          description: If date omitted the current date will be used.
+          description: If date omitted the current date will be used
+      required:
+        - indices
+        - date_from
    
    
     ErrorMessage:
