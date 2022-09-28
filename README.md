@@ -53,12 +53,16 @@ This section provides a summary of the Field Monitoring API endpoints:
 
 The table below lists the normalized indices names as they must be used in the API.
 
-| index           | short description                                                      |
-|-----------------|------------------------------------------------------------------------|
-| ndvi            | Normalized Difference Vegetation Index                                 |
-| ndre            | Normalized difference red edge index                                   |
-| lai             | Leaf Area Index                                                        |
-| maturity        | tbd                                                                    |
+| index                   | short description                                                      |
+|-------------------------|------------------------------------------------------------------------|
+| ndvi                    | Normalized Difference Vegetation Index                                 |
+| biomass                 | Normalized difference red edge index                                   |
+| lai                     | Leaf Area Index                                                        |
+| chl-lai                 | Joint Leaf Chlorophyll content and Leaf Area Index                     |
+| canopy-water-content    | tbd                                                                    |
+| yield-estimation        | tbd                                                                    |
+| crop-residues           | tbd                                                                    |
+| maturity                | tbd                                                                    |
 
 
 [OpenAPI Specifications](https://sensorsystems.iais.fraunhofer.de/doc/?url=https://raw.githubusercontent.com/atlasH2020-templates/field_monitoring/v0.1.1/oas)
