@@ -168,9 +168,6 @@ components:
           type: string
           format: date_to
           description: If date omitted the current date will be used
-      required:
-        - indices
-        - date_from
    
    
     ErrorMessage:
