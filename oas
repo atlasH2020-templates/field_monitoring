@@ -1,38 +1,26 @@
 openapi: 3.0.1
 info:
-  title: Field monitoring service template
-  description: Agricultural services for Field monitoring
-  version: 0.1.1
+  title: Field Monitoring Service Template API
+  version: 0.1.2
+externalDocs:
+  description: Service Template Document
+  url: "https://github.com/atlasH2020-templates/field_monitoring/blob/v0.1.2/README.md"
 paths:
   /indices/list:
     get:
       tags:
         - Indices List
-      summary: List of available Indices
+      summary: List indices provided by this service
       operationId: getIndicesList
       responses:
         '200':
-          description: List of available Indices
+          description: List of available indices
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Indices'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: 500 Internal Server Error
-        '503':
-          description: Service Unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: 503 Service Unavailable
+                type: array
+                items:
+                  $ref: '#/components/schemas/Index'
   /indices/{field_urn}/search:
     post:
       operationId: searchIndicesByDateRange
@@ -44,15 +32,33 @@ paths:
           in: path
           schema:
             type: string
-            example: urn:service_id:id
+            example: "urn:service_id:id"
           description: The Field Uniform Resource Name
           required: true
       requestBody:
-        description: Request for available indices by date range. A service incapable of providing such information should return all requested dates & indices as available.
+        description: Request for available indices by date range.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IndicesSearchRequest'
+              type: object
+              required:
+                - indices
+                - date_from
+              properties:
+                indices:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IndexName'
+                  description: List of indices to search for
+                date_from:
+                  type: string
+                  format: date
+                  description: The start date to use for the retrieval of the indicator
+                date_to:
+                  type: string
+                  format: date
+                  description: If date omitted the current date will be used
+
         required: true
       responses:
         '200':
@@ -60,43 +66,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IndicesSearchResults'
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      format: date
+                      example: '2019-05-17'
+                    indices:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Index'
         '204':
           description: No available Content
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: '204 No content: No available Index'
         '400':
-          description: Invalid Date range or Index
+          description: Invalid or missing parameters
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: '400 Bad Request: invalid Data range or Invalid Index'
-        '500':
-          description: Internal server error
+                $ref: '#/components/schemas/DetailedError'
+        '401':
+          description: Invalid or missing credentials,
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: 500 Internal Server Error
-        '503':
-          description: Service Unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-              example:
-                description: 503 Service Unavailable
- 
+                $ref: '#/components/schemas/DetailedError'
+
 components:
   schemas:
-    Index:
+    IndexName:
       type: string
       description: Name of Index
       enum:
@@ -108,81 +107,44 @@ components:
         - yield-estimation
         - crop-residues
         - maturity
-        
-    IndexSearch:
+
+    Index:
       type: object
       properties:
-        download_url:
-          type: string
-          description: 'Download Url' 
-          example: '{product_download_url}'
         index:
           type: string
           items :
-            $ref: '#/components/schemas/Index'
+            $ref: '#/components/schemas/IndexName'
           description: Index Name
           example: "ndvi"
-    
-    Indices:
-      type: array
-      items:
-        $ref: '#/components/schemas/Index'
-        
-        
-    DateResults:
-      type: object
-      properties:
-        date:
+        download_url:
           type: string
-          description: Available Dates
-          example: '2019-05-17'
-        indices:
-          type: array
-          items:
-            $ref: '#/components/schemas/IndexSearch'
-          description: Available Indices
-   
-   
-    IndicesSearchResults:
-      type: array
-      items:
-        $ref: '#/components/schemas/DateResults'
-    
-    
-    IndicesSearchRequest:
+          format: uri
+          description: 'Download Url for the GeoTIFF file'
+          example: '<geotiff_download_url>'
+
+    DetailedError:
       type: object
-      required:
-        - indices
-        - date_from
-      properties:
-        indices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Index'
-          description: List of the farm monitoring indices
-        date_from:
-          type: string
-          format: date_from
-          description: The start date to use for the retrieval of the indicator
-        date_to:
-          type: string
-          format: date_to
-          description: If date omitted the current date will be used
-   
-   
-    ErrorMessage:
-      type: object
-      description: This defines the structure of an error
+      description: This defines the structure of an error payload when one is present. Actual messages and additional error information content may change from one implementation to another
       properties:
         message:
           type: string
           description: error description
         status:
-          type: integer
-          description : number of HTTP error
+            type: string
+            description: http error code
+        error_url:
+          type: string
+          format: uri
+          description: "A service's proprietary UI url where the user may navigate to view additional information or be prompted for additional actions to deal with the error. A well-behaved FMIS will present his users with a visual indication and the means to click on this link when this attribute is present."
+        errors:
+          type: array
+          items:
+            type: string
+          description: Additional detailed information
       required:
         - message
-        - status
       example:
-        status: 401
-        message: No valid Access Token
+        message: this is a sample error message
+        errors:
+          - this is an example of additional error information
