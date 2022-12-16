@@ -1,6 +1,6 @@
-# ATLAS field_monitoring Service Template \[v0.1.2\]
+# ATLAS field_monitoring Service Template \[v0.1.3\]
 
-[OpenAPI Specifications](https://sensorsystems.iais.fraunhofer.de/doc/?url=https://raw.githubusercontent.com/atlasH2020-templates/field_monitoring/v0.1.2/oas)
+[OpenAPI Specifications](https://sensorsystems.iais.fraunhofer.de/doc/?url=https://raw.githubusercontent.com/atlasH2020-templates/field_monitoring/v0.1.3/oas)
 
 Author(s): AgroApps (AGA)
 
