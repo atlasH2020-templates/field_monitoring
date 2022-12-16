@@ -20,7 +20,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Index'
+                  $ref: '#/components/schemas/IndexName'
   /indices/{field_urn}/search:
     post:
       operationId: searchIndicesByDateRange
@@ -97,7 +97,6 @@ components:
   schemas:
     IndexName:
       type: string
-      description: Name of Index
       enum:
         - ndvi
         - biomass
