@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "1f6c78e9-e9e9-4a84-9588-d7c8b1e41744",
+		"name": "ATLAS field_monitoring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get indices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = JSON.parse(responseBody);",
+							"if (res?.length) {",
+							"  pm.collectionVariables.set(\"index\", res[0]);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{field_monitoring_url}}/indices/list",
+					"host": [
+						"{{field_monitoring_url}}"
+					],
+					"path": [
+						"indices",
+						"list"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "indices search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = JSON.parse(responseBody);",
+							"if (res?.length) {",
+							"  pm.collectionVariables.set(\"download_url\", res[0].indices.download_url);",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indices\": [\"{{index}}\"],\n    \"date_from\": \"2022-01-01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{field_monitoring_url}}/indices/{{field_urn}}/search",
+					"host": [
+						"{{field_monitoring_url}}"
+					],
+					"path": [
+						"indices",
+						"{{field_urn}}",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download geotiff",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{download_url}}",
+					"host": [
+						"{{download_url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{field_monitoring_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "index",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "download_url",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
